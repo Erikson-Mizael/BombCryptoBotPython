@@ -10,13 +10,34 @@ def nao_ocioso(delay, espera, vezes):
             text=f'Posicione na tela do jogo para iniciar o loop', title='Alerta', buttons=['OK', 'Cancel'])
         if vezes > 0 and confirme == 'OK':
             for i in range(0, vezes):
-                x_cash, y_cash = loc_service.procure_loop('cash.png').values()
+                x_cash, y_cash = loc_service.procure_sem_confirma(
+                    'cash.png').values()
                 click_service.click(int(x_cash), int(y_cash), delay)
                 pg.sleep(espera)
-                x_close, y_close = loc_service.procure_loop(
+                x_close, y_close = loc_service.procure_sem_confirma(
                     'close.png').values()
                 click_service.click(int(x_close), int(y_close), delay)
                 pg.sleep(espera)
+                print(f'Contagem loop {i+1}/{vezes}.', end='')
+            return {'success': 'loop finalizado', 'contagem': vezes}
+        return {'info': 'loop não inicializado'}
+    except NameError:
+        return {'erro': NameError}
+
+def nao_ocioso_sem_confirma(delay, espera, vezes):
+    try:
+        if vezes > 0:
+            for i in range(0, vezes):
+                x_cash, y_cash = loc_service.procure_sem_confirma('cash.png').values()
+                while y_cash == 0:
+                    x_cash, y_cash = loc_service.procure_sem_confirma('cash.png').values()
+                click_service.click(int(x_cash), int(y_cash), delay)
+                pg.sleep(espera)
+                x_close, y_close = loc_service.procure_sem_confirma(
+                    'close.png').values()
+                click_service.click(int(x_close), int(y_close), delay)
+                pg.sleep(espera)
+                print(f'Contagem loop {i+1}/{vezes}.', end='')
             return {'success': 'loop finalizado', 'contagem': vezes}
         return {'info': 'loop não inicializado'}
     except NameError:

@@ -15,11 +15,11 @@ def procure(imagem):
     except NameError:
         return {'fatal_error': NameError}
 
-
-def procure_loop(imagem):
+#(165, 211, 134)
+def procure_sem_confirma(imagem):
     try:
         loc = pg.locateCenterOnScreen(
-            f'./img/clicks/{LISTA_IMAGENS[LISTA_IMAGENS.index(imagem)]}')
-        return {'pos_x': f'{int(loc.x)}', 'pos_y': f'{int(loc.y)}'} if loc != None else {'erro': f'Imagem ({imagem}) nao encontrada'}
+            f'./img/clicks/{LISTA_IMAGENS[LISTA_IMAGENS.index(imagem)]}', confidence=0.8)
+        return {'pos_x': f'{int(loc.x)}', 'pos_y': f'{int(loc.y)}'} if loc != None else {'erro': f'Imagem ({imagem}) nao encontrada', 'x_y': 0}
     except NameError:
         return {'fatal_error': NameError}
