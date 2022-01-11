@@ -3,6 +3,7 @@
         "imread",
         "imshow",
         "posicao",
+        "pydantic",
         "starlette"
     ]
 }
