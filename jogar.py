@@ -8,8 +8,8 @@ import pyautogui as pg
 # 'mapa', 'menu', 'inicio', erro_encontrado' localize-se
 
 class Boot():
-    def __init__(self, limite, senha_desbloqueio, delay):
-        self.limite = limite
+    def __init__(self, vezes_espera, senha_desbloqueio, delay):
+        self.vezes_espera = vezes_espera
         self.senha_desbloqueio = senha_desbloqueio
         self.delay = delay
         print('Script iniciado')
@@ -19,7 +19,7 @@ class Boot():
             if result == 1:
                 tempo += result
             print(f'Result: {result} tempo: {tempo} entro no loop')
-            if tempo == 5:
+            if tempo == vezes_espera:
                 self.heros()
                 tempo = 0
         
@@ -194,14 +194,14 @@ class Boot():
 if __name__ == '__main__':
     senha_desbloqueio = 'Smplinux11'
     delay = 2
-    limite = 10
+    vezes_espera = 50
     try:
         senha_desbloqueio = input('Senha de desbloqueio caso precise: ')
         delay = input('Delay do mouse: ')
-        senha_desbloqueio = input('Limite para localizar os componentes na pagina inicial: ')
+        senha_desbloqueio = input('Limite vezes_espera para all heros: ')
     except NameError:
         print(f'Erro: {NameError} Algo não esteve certo.')
         print(f'Iniciando com valores padroes.')
     
-    bot = Boot(int(delay), senha_desbloqueio, int(limite))
+    bot = Boot(int(delay), senha_desbloqueio, int(vezes_espera))
     
