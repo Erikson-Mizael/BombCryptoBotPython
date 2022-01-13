@@ -5,17 +5,14 @@ from service.tarefas import nao_ocioso_service as n_oci_service
 from service.tarefas import verifica_estado_hero_service as ver_es_he_service
 from service.loop import jogar_service
 import pyautogui as pg
-from fastapi import FastAPI, Request
-from fastapi.templating import Jinja2Templates
+from fastapi import FastAPI
 
-templates = Jinja2Templates(directory="./")
 APP = FastAPI()
 
-
-@APP.get("/")
-def root(request: Request):
-    return templates.TemplateResponse("index.html", {"request": request})
-
+# Lista dos nomes das imagens
+@APP.get("/reconhecer")
+def reconhecer():
+    return True
 
 # Lista dos nomes das imagens
 @APP.get("/funcao/lista-imagens")
