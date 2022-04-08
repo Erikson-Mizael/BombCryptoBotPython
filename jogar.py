@@ -192,7 +192,7 @@ class Boot():
 
     
 if __name__ == '__main__':
-    senha_desbloqueio = 'Smplinux11'
+    senha_desbloqueio = ''
     delay = 2
     vezes_espera = 50
     try:
